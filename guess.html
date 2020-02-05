@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>COMP1073 Client-Side JavaScript</title>
+    <link rel="stylesheet" href="guess.css" />
+  </head>
+
+  <body>
+    <h1>Number Guessing Game</h1>
+    <p>I have picked a random number between 1 and 100. You have 10 chances to guess the number.</p>
+
+    <!-- Guessing form controls -->
+    <label for="guessField">Enter a guess: </label>
+    <input type="number" id="guessField">
+    <button id="submitButton">Submit guess</button id>
+    <button id="resetButton">Reset</button id>
+
+    <!-- Elements to contain feedback for user -->
+    <section>
+      <p id="lowOrHi"></p>
+    </section>
+
+    <script>
+      var submitButton = document.querySelector('#submitButton');
+      var resetButton = document.querySelector('#resetButton');
+     
+      var price ;
+     
+      submitButton.addEventListener('click',decideIfWon);
+      resetButton.addEventListener('click',resetField);
+      function resetField()
+      {
+        var guessField = document.querySelector('#guessField');
+        var lowOrHi  = document.querySelector('#lowOrHi');   
+        randomize();
+        guessField.value='';
+        lowOrHi.textContent='';
+        document.body.style.backgroundColor='white';
+
+      }
+      function randomize()
+      {
+        price = Math.floor(Math.random() *100) + 1;
+        console.log(price);
+    
+      }
+      function decideIfWon()
+      {
+        var guessField = document.querySelector('#guessField');
+        var lowOrHi  = document.querySelector('#lowOrHi');
+        if(guessField.value > price)
+        {
+          lowOrHi.textContent = 'too high';
+        }
+        else if(guessField.value < price)
+        {
+          lowOrHi.textContent ='too low';
+        }
+        else
+        {
+          lowOrHi.textContent ='winner';
+          document.body.style.backgroundColor='Green';
+        }
+
+      }
+      randomize();
+    </script>
+  </body>
+</html>
